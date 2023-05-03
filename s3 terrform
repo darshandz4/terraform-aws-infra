@@ -1,0 +1,23 @@
+## creating AWS provider
+provider "aws" {
+        access_key="AKIA6RGBDWVGNSLN5A7N"
+        secret_key="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"
+        region="ap-south-1"
+                }
+
+#creating s3 bucket
+resource "aws_s3_bucket" "s3-bucket" {
+  bucket = "vel-app-b-565"
+
+          tags = {
+         Name= "vel-app-312"
+          Environment = "Dev"
+                 }
+                                }
+
+## upload object in buket
+resource "aws_s3_bucket_object" "object" {
+  bucket = "${aws_s3_bucket.s3-bucket.id}"
+  key    = "object-name"
+  source = "/mnt/main.tf"
+
