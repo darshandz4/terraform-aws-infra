@@ -54,6 +54,24 @@ resource "aws_route_table_association" "two" {
         subnet_id="${aws_subnet.sub-2.id}"
         route_table_id="${aws_route_table.route-table.id}"
 						}
+# creating security-group
+resource "aws_security_group" "my_security_group" {
+  vpc_id = aws_vpc.my_vpc.id
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 #creating instance resouce
 resource "aws_instance""my-instance" {
         ami="ami-022d03f649d12a49d"
